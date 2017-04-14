@@ -5,9 +5,9 @@ public class MyFirstProgram {
 
 		public static void main(String[] args) {
 
-			Point p1 = new Point(1, 2);
+			Point p1 = new Point(1, 3);
 
-			Point p2 = new Point(3, 4);
+			Point p2 = new Point(5, 10);
 
 
 			System.out.println("Расстояние между точками = " + distance(p1, p2));
@@ -19,7 +19,7 @@ public class MyFirstProgram {
 
 		public static double distance(Point p1, Point p2){
 
-			return Math.sqrt(Math.pow((p1.у - p1.х),2) + Math.pow((p2.у - p2.х),2));
+			return Math.sqrt(Math.pow((p2.х - p1.х),2) + Math.pow((p2.у - p1.у),2));
 
 		}
 

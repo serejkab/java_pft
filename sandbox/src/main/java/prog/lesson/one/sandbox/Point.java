@@ -17,10 +17,10 @@ class Point {
 
   public   double distance(double х, double у) {
 
-       this.х = х;
-       this.у = у;
+      double dx = this.х - х;
+      double dy = this.у - у;
 
-        return Math.sqrt(Math.pow((х - у),2) + Math.pow((х - у),2));
+      return Math.sqrt(dx*dx + dy*dy);
 
     }
 
