@@ -32,7 +32,7 @@ public class ContactCreationsTests {
     }
 
     @Test
-    public void ContactCreationsTests() {
+    public void testContactCreations() {
 
         gotoPageContacts();
         fillContactFio(new ContactFio("Sergey", "Test2", "Babakhin"));
