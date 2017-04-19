@@ -39,21 +39,6 @@ public class ApplicationManager {
 
 
 
-    public void logout() {
-        wd.findElement(By.linkText("Logout")).click();
-    }
-
-    public void gotoPageHome() {
-        wd.findElement(By.linkText("home")).click();
-    }
-
-    public void submitData() {
-        wd.findElement(By.name("submit")).click();
-    }
-
-    public void gotoPageContacts() {
-        wd.findElement(By.linkText("add new")).click();
-    }
 
     public GroupHelper getGroupHelper() {
         return groupHelper;

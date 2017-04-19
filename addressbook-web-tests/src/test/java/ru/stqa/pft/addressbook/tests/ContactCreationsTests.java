@@ -12,13 +12,13 @@ public class ContactCreationsTests extends TestBase{
     @Test
     public void testContactCreations() {
 
-        app.gotoPageContacts();
-        app.getContactHelper().fillContactFio(new ContactFio("Sergey", "Test2", "Babakhin"));
+        app.getNavigationHelper().gotoPageContacts();
+        app.getContactHelper().fillContactFio(new ContactFio("sdfsdfsdfs", "sffsdfsd", "GFGHFGHFGHFH"));
         app.getContactHelper().fillContactInformation(new ContactInformation("serejka_sm", "Title", "equifax"));
-        app.getContactHelper().fillContactAddressPhone(new ContactAddressPhone("каланчевская плаза", "999-99-99"));
-        app.submitData();
-        app.gotoPageHome();
-        app.logout();
+        app.getContactHelper().fillContactAddressPhone(new ContactAddressPhone("каланчевская плаза", "999-99-98889"));
+        app.getNavigationHelper().submitData();
+        app.getNavigationHelper().gotoPageHome();
+        app.getNavigationHelper().logout();
 
     }
 
