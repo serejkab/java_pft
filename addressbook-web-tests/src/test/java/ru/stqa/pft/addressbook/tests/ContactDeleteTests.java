@@ -17,6 +17,7 @@ public class ContactDeleteTests  extends TestBase{
 
         if(!app.getContactHelper().isThereAContact())
         {
+            app.getNavigationHelper().gotoPageContacts();
             app.getContactHelper().createContactFio(new ContactFio("dsfdsf", "sdfsdf", "dfgdfgdfg"));
             app.getContactHelper().createContactInformation(new ContactInformation("serejka_sm", "Title", "equifax"));
             app.getContactHelper().createContactPhone(new ContactAddressPhone("каланчевская плаза", "999-99-98889"));
