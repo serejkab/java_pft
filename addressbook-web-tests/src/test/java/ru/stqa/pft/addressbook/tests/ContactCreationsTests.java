@@ -13,7 +13,7 @@ public class ContactCreationsTests extends TestBase{
     public void testContactCreations() {
 
         app.getNavigationHelper().gotoPageContacts();
-        app.getContactHelper().fillContactFio(new ContactFio("sdfsdfsdfs", "sffsdfsd", "GFGHFGHFGHFH"));
+        app.getContactHelper().fillContactFio(new ContactFio(null, null, "GFGHFGHFGHFH"));
         app.getContactHelper().fillContactInformation(new ContactInformation("serejka_sm", "Title", "equifax"));
         app.getContactHelper().fillContactAddressPhone(new ContactAddressPhone("каланчевская плаза", "999-99-98889"));
         app.getNavigationHelper().submitData();

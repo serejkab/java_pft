@@ -20,7 +20,6 @@ public class ContactHelper extends HelperBase {
     public void fillContactAddressPhone(ContactAddressPhone contactAddressPhone) {
 
        type(By.name("address"),contactAddressPhone.getStreet());
-     //  click(By.name("theform"));
        type(By.name("home"),contactAddressPhone.getPhone());
 
     }
