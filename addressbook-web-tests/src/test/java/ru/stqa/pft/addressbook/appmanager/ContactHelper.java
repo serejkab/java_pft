@@ -60,4 +60,27 @@ public class ContactHelper extends HelperBase {
 
         wd.switchTo().alert().accept();
     }
+
+
+    public void createContactFio(ContactFio contactFio) {
+
+        fillContactFio(contactFio);
+
+    }
+
+
+    public void createContactInformation(ContactInformation contactInformation) {
+
+        fillContactInformation(contactInformation);
+    }
+
+
+    public void createContactPhone(ContactAddressPhone contactAddressPhone) {
+
+        fillContactAddressPhone(contactAddressPhone);
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.name("selected[]"));
+    }
 }
