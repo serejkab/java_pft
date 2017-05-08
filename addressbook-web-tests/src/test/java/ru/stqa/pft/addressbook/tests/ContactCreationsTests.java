@@ -1,10 +1,13 @@
 package ru.stqa.pft.addressbook.tests;
 
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactAddressPhone;
 import ru.stqa.pft.addressbook.model.ContactFio;
 import ru.stqa.pft.addressbook.model.ContactInformation;
+
+import java.util.List;
 
 public class ContactCreationsTests extends TestBase{
 
@@ -12,6 +15,8 @@ public class ContactCreationsTests extends TestBase{
     @Test
     public void testContactCreations() {
 
+
+        List<ContactFio> before = app.getContactHelper().getContactList();
         app.getNavigationHelper().gotoPageContacts();
 
         app.getContactHelper().createContactFio(new ContactFio(null, null, "GFGHFGHFGHFH"));
@@ -20,6 +25,9 @@ public class ContactCreationsTests extends TestBase{
 
         app.getNavigationHelper().submitData();
         app.getNavigationHelper().gotoPageHome();
+        List<ContactFio> after = app.getContactHelper().getContactList();
+        Assert.assertEquals(after.size(), before.size() + 1);
+
         app.getNavigationHelper().logout();
 
     }

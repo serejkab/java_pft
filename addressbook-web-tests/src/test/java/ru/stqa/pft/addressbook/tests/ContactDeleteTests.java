@@ -1,9 +1,12 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactAddressPhone;
 import ru.stqa.pft.addressbook.model.ContactFio;
 import ru.stqa.pft.addressbook.model.ContactInformation;
+
+import java.util.List;
 
 /**
  * Created by SerejKa on 19.04.2017.
@@ -15,6 +18,7 @@ public class ContactDeleteTests  extends TestBase{
 
         app.getNavigationHelper().gotoPageHome();
 
+
         if(!app.getContactHelper().isThereAContact())
         {
             app.getNavigationHelper().gotoPageContacts();
@@ -24,10 +28,13 @@ public class ContactDeleteTests  extends TestBase{
             app.getNavigationHelper().submitData();
             app.getNavigationHelper().gotoPageHome();
         }
-        app.getContactHelper().selectContact();
+        List<ContactFio> before = app.getContactHelper().getContactList();
+        app.getContactHelper().selectContact(before.size() - 2);
         app.getContactHelper().pushDeleteContact();
         app.getContactHelper().alertAccept();
         app.getNavigationHelper().gotoPageHome();
+        List<ContactFio> after = app.getContactHelper().getContactList();
+        Assert.assertEquals(after.size(), before.size() - 1);
 
     }
 
