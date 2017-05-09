@@ -10,7 +10,7 @@ public class ContactFio {
     private final String lastname;
 
     public ContactFio(String name, String middlename, String lastname) {
-        this.id = 0;
+        this.id = Integer.MAX_VALUE;
         this.name = name;
         this.middlename = middlename;
         this.lastname = lastname;

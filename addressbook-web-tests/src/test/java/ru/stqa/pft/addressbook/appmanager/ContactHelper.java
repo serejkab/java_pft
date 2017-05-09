@@ -105,10 +105,13 @@ public class ContactHelper extends HelperBase {
 
         List<ContactFio> contacts = new ArrayList<>();
         List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
+
         for (WebElement element : elements){
-            String name = element.getText();
+            List<WebElement> cells = element.findElements(By.tagName("td"));
+            String name = cells.get(1).getText();
+            String lastname = cells.get(2).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            ContactFio contact = new ContactFio(id, name, null,null);
+            ContactFio contact = new ContactFio(id, lastname, null,name);
             contacts.add(contact);
     }
     return contacts;
