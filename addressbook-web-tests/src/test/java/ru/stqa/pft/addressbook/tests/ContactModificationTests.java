@@ -6,6 +6,8 @@ import ru.stqa.pft.addressbook.model.ContactAddressPhone;
 import ru.stqa.pft.addressbook.model.ContactFio;
 import ru.stqa.pft.addressbook.model.ContactInformation;
 
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -31,14 +33,23 @@ public class ContactModificationTests extends TestBase{
             }
             List<ContactFio> before = app.getContactHelper().getContactList();
             app.getContactHelper().selectContact(before.size()-1);
-            app.getContactHelper().pushEdit();
-            app.getContactHelper().fillContactFio(new ContactFio("МИНУССС", "элемент", "Элемент -4"));
+            app.getContactHelper().pushEdit(before.get(before.size() - 1).getId());
+            ContactFio contact = new ContactFio(before.get(before.size() - 1).getId(),"ПОСЛЕДНИЙ777", "элемент", "ЭЛЕМЕНТ");
+            app.getContactHelper().fillContactFio(contact);
             app.getContactHelper().fillContactInformation(new ContactInformation("serejka_sm", "Title", "equifax"));
             app.getContactHelper().fillContactAddressPhone(new ContactAddressPhone("800000 kkkkkkkkk", "999-9999777-99"));
             app.getNavigationHelper().updateData();
             app.getNavigationHelper().gotoPageHome();
             List<ContactFio> after = app.getContactHelper().getContactList();
             Assert.assertEquals(after.size(), before.size());
+
+            before.remove(before.size()-1);
+
+            before.add(contact);
+            Comparator<? super ContactFio> byId = (c1, c2) -> Integer.compare(c1.getId(),c2.getId());
+            before.sort(byId);
+            after.sort(byId);
+            Assert.assertEquals(before, after);
 
         }
 

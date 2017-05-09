@@ -48,11 +48,19 @@ public class ContactHelper extends HelperBase {
     public void selectContact(int index){
 
         wd.findElements(By.name("selected[]")).get(index).click();
+
+
     }
 
-    public void pushEdit(){
+    public void pushEdit(int id){
 
-       click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+        WebElement checkbox = wd.findElement(By.id(Integer.toString(id)));
+
+        checkbox.findElement(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img")).click();
+
+
+
+
     }
 
     public void pushDeleteContact(){
@@ -96,10 +104,11 @@ public class ContactHelper extends HelperBase {
     public List<ContactFio> getContactList() {
 
         List<ContactFio> contacts = new ArrayList<>();
-        List<WebElement> elements = wd.findElements(By.cssSelector("table tr"));
+        List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
         for (WebElement element : elements){
             String name = element.getText();
-            ContactFio contact = new ContactFio(name, null,null);
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            ContactFio contact = new ContactFio(id, name, null,null);
             contacts.add(contact);
     }
     return contacts;

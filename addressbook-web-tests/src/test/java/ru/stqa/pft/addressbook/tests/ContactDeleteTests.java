@@ -29,12 +29,15 @@ public class ContactDeleteTests  extends TestBase{
             app.getNavigationHelper().gotoPageHome();
         }
         List<ContactFio> before = app.getContactHelper().getContactList();
-        app.getContactHelper().selectContact(before.size() - 2);
+        app.getContactHelper().selectContact(before.size() - 1);
         app.getContactHelper().pushDeleteContact();
         app.getContactHelper().alertAccept();
         app.getNavigationHelper().gotoPageHome();
         List<ContactFio> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size() - 1);
+
+        before.remove(before.size() - 1);
+        Assert.assertEquals(before,after);
 
     }
 
