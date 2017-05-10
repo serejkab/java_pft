@@ -20,7 +20,7 @@ public class ContactCreationsTests extends TestBase{
         List<ContactFio> before = app.getContactHelper().getContactList();
         app.getNavigationHelper().gotoPageContacts();
 
-        ContactFio contact = new ContactFio("ПОСЛЕДНИЙ7222", "элемен222т", "ЭЛЕМЕНТ");
+        ContactFio contact = new ContactFio("ПОСЛЕДНИЙ", "элемент", "ЭЛЕМЕНТ7777");
         app.getContactHelper().createContactFio(contact);
         app.getContactHelper().createContactInformation(new ContactInformation("serejka_sm", "Title", "equifax"));
         app.getContactHelper().createContactPhone(new ContactAddressPhone("каланчевская плаза", "999-99-98889"));

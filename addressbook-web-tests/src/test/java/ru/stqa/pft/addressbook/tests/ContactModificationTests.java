@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactAddressPhone;
 import ru.stqa.pft.addressbook.model.ContactFio;
@@ -15,26 +16,30 @@ import java.util.List;
  */
 public class ContactModificationTests extends TestBase{
 
+    @BeforeMethod
+    public void ensurePreconditions(){
+
+        app.getNavigationHelper().gotoPageHome();
+        if(!app.getContactHelper().isThereAContact())
+        {
+            app.getNavigationHelper().gotoPageContacts();
+            app.getContactHelper().createContactFio(new ContactFio("dsfdsf", "sdfsdf", "dfgdfgdfg"));
+            app.getContactHelper().createContactInformation(new ContactInformation("serejka_sm", "Title", "equifax"));
+            app.getContactHelper().createContactPhone(new ContactAddressPhone("каланчевская плаза", "999-99-98889"));
+            app.getNavigationHelper().submitData();
+            app.getNavigationHelper().gotoPageHome();
+        }
+
+    }
+
         @Test
         public void testContactModification(){
 
-
-            app.getNavigationHelper().gotoPageHome();
-
-
-            if(!app.getContactHelper().isThereAContact())
-            {
-                app.getNavigationHelper().gotoPageContacts();
-                app.getContactHelper().createContactFio(new ContactFio("dsfdsf", "sdfsdf", "dfgdfgdfg"));
-                app.getContactHelper().createContactInformation(new ContactInformation("serejka_sm", "Title", "equifax"));
-                app.getContactHelper().createContactPhone(new ContactAddressPhone("каланчевская плаза", "999-99-98889"));
-                app.getNavigationHelper().submitData();
-                app.getNavigationHelper().gotoPageHome();
-            }
             List<ContactFio> before = app.getContactHelper().getContactList();
-            app.getContactHelper().selectContact(before.size()-1);
-            app.getContactHelper().pushEdit(before.get(before.size() - 1).getId());
-            ContactFio contact = new ContactFio(before.get(before.size() - 1).getId(),"ПОСЛЕДНИЙ7773333", "элемент333", "ЭЛЕМЕНТ");
+            int index = before.size() - 3;
+            app.getContactHelper().selectContact(index);
+            app.getContactHelper().pushEdit(before.get(index).getId());
+            ContactFio contact = new ContactFio(before.get(index).getId(),"ПОСЛЕДНИЙ177773", "элемент77777", "ЭЛЕМЕНТ7771");
             app.getContactHelper().fillContactFio(contact);
             app.getContactHelper().fillContactInformation(new ContactInformation("serejka_sm", "Title", "equifax"));
             app.getContactHelper().fillContactAddressPhone(new ContactAddressPhone("800000 kkkkkkkkk", "999-9999777-99"));
@@ -43,7 +48,7 @@ public class ContactModificationTests extends TestBase{
             List<ContactFio> after = app.getContactHelper().getContactList();
             Assert.assertEquals(after.size(), before.size());
 
-            before.remove(before.size()-1);
+            before.remove(index);
 
             before.add(contact);
             Comparator<? super ContactFio> byId = (c1, c2) -> Integer.compare(c1.getId(),c2.getId());

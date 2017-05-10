@@ -54,12 +54,7 @@ public class ContactHelper extends HelperBase {
 
     public void pushEdit(int id){
 
-        WebElement checkbox = wd.findElement(By.id(Integer.toString(id)));
-
-        checkbox.findElement(By.xpath("//table/tbody/tr[2]/td[8]/a/img")).click();
-
-
-
+     wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
 
     }
 
