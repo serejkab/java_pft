@@ -34,7 +34,7 @@ public class ContactModificationTests extends TestBase{
             List<ContactFio> before = app.getContactHelper().getContactList();
             app.getContactHelper().selectContact(before.size()-1);
             app.getContactHelper().pushEdit(before.get(before.size() - 1).getId());
-            ContactFio contact = new ContactFio(before.get(before.size() - 1).getId(),"ПОСЛЕДНИЙ777", "элемент", "ЭЛЕМЕНТ");
+            ContactFio contact = new ContactFio(before.get(before.size() - 1).getId(),"ПОСЛЕДНИЙ7773333", "элемент333", "ЭЛЕМЕНТ");
             app.getContactHelper().fillContactFio(contact);
             app.getContactHelper().fillContactInformation(new ContactInformation("serejka_sm", "Title", "equifax"));
             app.getContactHelper().fillContactAddressPhone(new ContactAddressPhone("800000 kkkkkkkkk", "999-9999777-99"));

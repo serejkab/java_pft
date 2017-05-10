@@ -56,7 +56,7 @@ public class ContactHelper extends HelperBase {
 
         WebElement checkbox = wd.findElement(By.id(Integer.toString(id)));
 
-        checkbox.findElement(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img")).click();
+        checkbox.findElement(By.xpath("//table/tbody/tr[2]/td[8]/a/img")).click();
 
 
 
@@ -108,10 +108,10 @@ public class ContactHelper extends HelperBase {
 
         for (WebElement element : elements){
             List<WebElement> cells = element.findElements(By.tagName("td"));
-            String name = cells.get(1).getText();
-            String lastname = cells.get(2).getText();
+            String lastname = cells.get(1).getText();
+            String name = cells.get(2).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            ContactFio contact = new ContactFio(id, lastname, null,name);
+            ContactFio contact = new ContactFio(id, name, null, lastname);
             contacts.add(contact);
     }
     return contacts;
