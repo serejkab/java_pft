@@ -17,17 +17,17 @@ public class ContactCreationsTests extends TestBase{
     public void testContactCreations() {
 
 
-        List<ContactFio> before = app.getContactHelper().getContactList();
-        app.getNavigationHelper().gotoPageContacts();
+        List<ContactFio> before = app.contact().list();
+        app.goTo().gotoPageContacts();
 
-        ContactFio contact = new ContactFio("ПОСЛЕДНИЙ", "элемент", "ЭЛЕМЕНТ7777");
-        app.getContactHelper().createContactFio(contact);
-        app.getContactHelper().createContactInformation(new ContactInformation("serejka_sm", "Title", "equifax"));
-        app.getContactHelper().createContactPhone(new ContactAddressPhone("каланчевская плаза", "999-99-98889"));
+        ContactFio contact = new ContactFio().withName("fddgdfg").withMiddlename("dssdf").withLastname("sdfsdf");
+        app.contact().createContactFio(contact);
+        app.contact().createContactInformation(new ContactInformation().withNickname("serejka_sm").withTitle("Title").withCompany("equifax"));
+        app.contact().createContactPhone(new ContactAddressPhone().withStreet("каланчевская плаза").withPhone("999-99-98889"));
 
-        app.getNavigationHelper().submitData();
-        app.getNavigationHelper().gotoPageHome();
-        List<ContactFio> after = app.getContactHelper().getContactList();
+        app.goTo().submitData();
+        app.goTo().pageHome();
+        List<ContactFio> after = app.contact().list();
         Assert.assertEquals(after.size(), before.size() + 1);
 
         before.add(contact);
@@ -37,7 +37,7 @@ public class ContactCreationsTests extends TestBase{
         before.sort(byId);
         after.sort(byId);
         Assert.assertEquals(before, after);
-        app.getNavigationHelper().logout();
+        app.goTo().logout();
 
     }
 

@@ -1,12 +1,19 @@
 package ru.stqa.pft.addressbook.model;
 
 public class ContactAddressPhone {
-    private final String street;
-    private final String phone;
+    private  String street;
+    private  String phone;
 
-    public ContactAddressPhone(String street, String phone) {
+
+
+    public ContactAddressPhone withStreet(String street) {
         this.street = street;
+        return this;
+    }
+
+    public ContactAddressPhone withPhone(String phone) {
         this.phone = phone;
+        return this;
     }
 
     public String getStreet() {

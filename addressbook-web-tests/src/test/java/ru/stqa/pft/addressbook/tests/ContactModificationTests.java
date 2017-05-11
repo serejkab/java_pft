@@ -8,7 +8,6 @@ import ru.stqa.pft.addressbook.model.ContactFio;
 import ru.stqa.pft.addressbook.model.ContactInformation;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -19,15 +18,15 @@ public class ContactModificationTests extends TestBase{
     @BeforeMethod
     public void ensurePreconditions(){
 
-        app.getNavigationHelper().gotoPageHome();
-        if(!app.getContactHelper().isThereAContact())
+        app.goTo().pageHome();
+        if(app.contact().list().size() == 0)
         {
-            app.getNavigationHelper().gotoPageContacts();
-            app.getContactHelper().createContactFio(new ContactFio("dsfdsf", "sdfsdf", "dfgdfgdfg"));
-            app.getContactHelper().createContactInformation(new ContactInformation("serejka_sm", "Title", "equifax"));
-            app.getContactHelper().createContactPhone(new ContactAddressPhone("каланчевская плаза", "999-99-98889"));
-            app.getNavigationHelper().submitData();
-            app.getNavigationHelper().gotoPageHome();
+            app.goTo().gotoPageContacts();
+            app.contact().createContactFio(new ContactFio().withName("fddgdfg").withMiddlename("dssdf").withLastname("sdfsdf"));
+            app.contact().createContactInformation(new ContactInformation().withNickname("serejka_sm").withTitle("Title").withCompany("equifax"));
+            app.contact().createContactPhone(new ContactAddressPhone().withStreet("каланчевская плаза").withPhone("999-99-98889"));
+            app.goTo().submitData();
+            app.goTo().pageHome();
         }
 
     }
@@ -35,17 +34,17 @@ public class ContactModificationTests extends TestBase{
         @Test
         public void testContactModification(){
 
-            List<ContactFio> before = app.getContactHelper().getContactList();
+            List<ContactFio> before = app.contact().list();
             int index = before.size() - 1;
-            app.getContactHelper().selectContact(index);
-            app.getContactHelper().pushEdit(before.get(index).getId());
-            ContactFio contact = new ContactFio(before.get(index).getId(),"ПОСЛЕДНИЙ177773", "элемент77777", "ЭЛЕМЕНТ7771");
-            app.getContactHelper().fillContactFio(contact);
-            app.getContactHelper().fillContactInformation(new ContactInformation("serejka_sm", "Title", "equifax"));
-            app.getContactHelper().fillContactAddressPhone(new ContactAddressPhone("800000 kkkkkkkkk", "999-9999777-99"));
-            app.getNavigationHelper().updateData();
-            app.getNavigationHelper().gotoPageHome();
-            List<ContactFio> after = app.getContactHelper().getContactList();
+            app.contact().selectContact(index);
+            app.contact().pushEdit(before.get(index).getId());
+            ContactFio contact = new ContactFio().withId(before.get(index).getId()).withName("fddgdfg").withMiddlename("dssdf").withLastname("sdfsdf");
+            app.contact().fillContactFio(contact);
+            app.contact().fillContactInformation(new ContactInformation().withNickname("serejka_sm").withTitle("Title").withCompany("equifax"));
+            app.contact().fillContactAddressPhone(new ContactAddressPhone().withStreet("каланчевская плаза").withPhone("999-99-98889"));
+            app.goTo().updateData();
+            app.goTo().pageHome();
+            List<ContactFio> after = app.contact().list();
             Assert.assertEquals(after.size(), before.size());
 
             before.remove(index);

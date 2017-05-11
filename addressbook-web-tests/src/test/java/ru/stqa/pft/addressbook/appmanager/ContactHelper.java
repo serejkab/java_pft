@@ -96,7 +96,7 @@ public class ContactHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<ContactFio> getContactList() {
+    public List<ContactFio> list() {
 
         List<ContactFio> contacts = new ArrayList<>();
         List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
@@ -106,9 +106,15 @@ public class ContactHelper extends HelperBase {
             String lastname = cells.get(1).getText();
             String name = cells.get(2).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            ContactFio contact = new ContactFio(id, name, null, lastname);
-            contacts.add(contact);
+            contacts.add(new ContactFio().withId(id).withName(name).withLastname(lastname));
     }
     return contacts;
     }
+
+    public void delete(int index) {
+       selectContact(index);
+        pushDeleteContact();
+        alertAccept();
+    }
+
 }

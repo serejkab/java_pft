@@ -16,15 +16,15 @@ public class ContactDeleteTests  extends TestBase{
 
     @BeforeMethod
     public void ensurePreconditions(){
-        app.getNavigationHelper().gotoPageHome();
-        if(!app.getContactHelper().isThereAContact())
+        app.goTo().pageHome();
+        if(app.contact().list().size() == 0)
         {
-            app.getNavigationHelper().gotoPageContacts();
-            app.getContactHelper().createContactFio(new ContactFio("dsfdsf", "sdfsdf", "dfgdfgdfg"));
-            app.getContactHelper().createContactInformation(new ContactInformation("serejka_sm", "Title", "equifax"));
-            app.getContactHelper().createContactPhone(new ContactAddressPhone("каланчевская плаза", "999-99-98889"));
-            app.getNavigationHelper().submitData();
-            app.getNavigationHelper().gotoPageHome();
+            app.goTo().gotoPageContacts();
+            app.contact().createContactFio(new ContactFio().withName("fddgdfg").withMiddlename("dssdf").withLastname("sdfsdf"));
+            app.contact().createContactInformation(new ContactInformation().withNickname("serejka_sm").withTitle("Title").withCompany("equifax"));
+            app.contact().createContactPhone(new ContactAddressPhone().withStreet("каланчевская плаза").withPhone("999-99-98889"));
+            app.goTo().submitData();
+            app.goTo().pageHome();
         }
 
     }
@@ -32,18 +32,18 @@ public class ContactDeleteTests  extends TestBase{
     @Test
     public void testContactDeletion(){
 
-        List<ContactFio> before = app.getContactHelper().getContactList();
+        List<ContactFio> before = app.contact().list();
         int index = before.size() - 1;
-        app.getContactHelper().selectContact(index);
-        app.getContactHelper().pushDeleteContact();
-        app.getContactHelper().alertAccept();
-        app.getNavigationHelper().gotoPageHome();
-        List<ContactFio> after = app.getContactHelper().getContactList();
-        Assert.assertEquals(after.size(), index);
+        app.contact().delete(index);
+        app.goTo().pageHome();
+        List<ContactFio> after = app.contact().list();
+        Assert.assertEquals(after.size(), before.size() - 1);
 
         before.remove(index);
         Assert.assertEquals(before,after);
 
     }
+
+
 
 }

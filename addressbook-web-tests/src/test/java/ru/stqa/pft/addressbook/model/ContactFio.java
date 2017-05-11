@@ -4,34 +4,18 @@ public class ContactFio {
 
 
 
-    private  int id;
-    private final String name;
-    private final String middlename;
-    private final String lastname;
-
-    public ContactFio(String name, String middlename, String lastname) {
-        this.id = Integer.MAX_VALUE;
-        this.name = name;
-        this.middlename = middlename;
-        this.lastname = lastname;
-    }
+    private  int id = Integer.MAX_VALUE;
+    private  String name;
+    private  String middlename;
+    private  String lastname;
 
 
-    public ContactFio(int id, String name, String middlename, String lastname) {
+    public ContactFio withId(int id) {
         this.id = id;
-        this.name = name;
-        this.middlename = middlename;
-        this.lastname = lastname;
+        return this;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getId() {
-
-        return id;
-    }
+    public int getId() {return id;}
 
     public String getName() {
         return name;
@@ -43,6 +27,21 @@ public class ContactFio {
 
     public String getLastname() {
         return lastname;
+    }
+
+    public ContactFio withName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public ContactFio withMiddlename(String middlename) {
+        this.middlename = middlename;
+        return this;
+    }
+
+    public ContactFio withLastname(String lastname) {
+        this.lastname = lastname;
+        return this;
     }
 
     @Override

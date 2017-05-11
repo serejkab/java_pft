@@ -1,14 +1,24 @@
 package ru.stqa.pft.addressbook.model;
 
 public class ContactInformation {
-    private final String nickname;
-    private final String title;
-    private final String company;
+    private  String nickname;
+    private  String title;
+    private  String company;
 
-    public ContactInformation(String nickname, String title, String company) {
+
+    public ContactInformation withNickname(String nickname) {
         this.nickname = nickname;
+        return this;
+    }
+
+    public ContactInformation withTitle(String title) {
         this.title = title;
+        return this;
+    }
+
+    public ContactInformation withCompany(String company) {
         this.company = company;
+        return this;
     }
 
     public String getNickname() {
