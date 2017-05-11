@@ -36,7 +36,7 @@ public class ContactModificationTests extends TestBase{
         public void testContactModification(){
 
             List<ContactFio> before = app.getContactHelper().getContactList();
-            int index = before.size() - 3;
+            int index = before.size() - 1;
             app.getContactHelper().selectContact(index);
             app.getContactHelper().pushEdit(before.get(index).getId());
             ContactFio contact = new ContactFio(before.get(index).getId(),"ПОСЛЕДНИЙ177773", "элемент77777", "ЭЛЕМЕНТ7771");
