@@ -9,6 +9,7 @@ import ru.stqa.pft.addressbook.model.ContactInformation;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 public class ContactCreationsTests extends TestBase{
 
@@ -17,7 +18,7 @@ public class ContactCreationsTests extends TestBase{
     public void testContactCreations() {
 
 
-        List<ContactFio> before = app.contact().list();
+        Set<ContactFio> before = app.contact().all();
         app.goTo().gotoPageContacts();
 
         ContactFio contact = new ContactFio().withName("fddgdfg").withMiddlename("dssdf").withLastname("sdfsdf");
@@ -27,15 +28,11 @@ public class ContactCreationsTests extends TestBase{
 
         app.goTo().submitData();
         app.goTo().pageHome();
-        List<ContactFio> after = app.contact().list();
+        Set<ContactFio> after = app.contact().all();
         Assert.assertEquals(after.size(), before.size() + 1);
 
+        contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt());
         before.add(contact);
-
-
-        Comparator<? super ContactFio> byId = Comparator.comparingInt(ContactFio::getId);
-        before.sort(byId);
-        after.sort(byId);
         Assert.assertEquals(before, after);
         app.goTo().logout();
 

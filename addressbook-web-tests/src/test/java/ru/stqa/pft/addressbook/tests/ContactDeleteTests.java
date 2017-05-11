@@ -8,6 +8,7 @@ import ru.stqa.pft.addressbook.model.ContactFio;
 import ru.stqa.pft.addressbook.model.ContactInformation;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by SerejKa on 19.04.2017.
@@ -17,7 +18,7 @@ public class ContactDeleteTests  extends TestBase{
     @BeforeMethod
     public void ensurePreconditions(){
         app.goTo().pageHome();
-        if(app.contact().list().size() == 0)
+        if(app.contact().all().size() == 0)
         {
             app.goTo().gotoPageContacts();
             app.contact().createContactFio(new ContactFio().withName("fddgdfg").withMiddlename("dssdf").withLastname("sdfsdf"));
@@ -32,14 +33,14 @@ public class ContactDeleteTests  extends TestBase{
     @Test
     public void testContactDeletion(){
 
-        List<ContactFio> before = app.contact().list();
-        int index = before.size() - 1;
-        app.contact().delete(index);
+        Set<ContactFio> before = app.contact().all();
+        ContactFio deleteContact = before.iterator().next();
+        app.contact().delete(deleteContact);
         app.goTo().pageHome();
-        List<ContactFio> after = app.contact().list();
+        Set<ContactFio> after = app.contact().all();
         Assert.assertEquals(after.size(), before.size() - 1);
 
-        before.remove(index);
+        before.remove(deleteContact);
         Assert.assertEquals(before,after);
 
     }

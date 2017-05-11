@@ -3,13 +3,14 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.pft.addressbook.model.ContactAddressPhone;
 import ru.stqa.pft.addressbook.model.ContactFio;
 import ru.stqa.pft.addressbook.model.ContactInformation;
 
-import java.util.ArrayList;
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by SerejKa on 18.04.2017.
@@ -45,10 +46,11 @@ public class ContactHelper extends HelperBase {
     }
 
 
-    public void selectContact(int index){
 
-        wd.findElements(By.name("selected[]")).get(index).click();
 
+    public void selectContactById(int id){
+
+        wd.findElement(By.cssSelector("input[value='"+ id +"']")).click();
 
     }
 
@@ -96,9 +98,10 @@ public class ContactHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<ContactFio> list() {
 
-        List<ContactFio> contacts = new ArrayList<>();
+    public Set<ContactFio> all() {
+
+        Set<ContactFio> contacts = new HashSet<>();
         List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
 
         for (WebElement element : elements){
@@ -107,12 +110,14 @@ public class ContactHelper extends HelperBase {
             String name = cells.get(2).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             contacts.add(new ContactFio().withId(id).withName(name).withLastname(lastname));
-    }
-    return contacts;
+        }
+        return contacts;
     }
 
-    public void delete(int index) {
-       selectContact(index);
+
+
+    public void delete(ContactFio contact) {
+        selectContactById(contact.getId());
         pushDeleteContact();
         alertAccept();
     }
