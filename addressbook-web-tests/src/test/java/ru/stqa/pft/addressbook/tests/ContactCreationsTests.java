@@ -7,8 +7,6 @@ import ru.stqa.pft.addressbook.model.ContactAddressPhone;
 import ru.stqa.pft.addressbook.model.ContactFio;
 import ru.stqa.pft.addressbook.model.ContactInformation;
 
-import java.util.Comparator;
-import java.util.List;
 import java.util.Set;
 
 public class ContactCreationsTests extends TestBase{
@@ -21,7 +19,7 @@ public class ContactCreationsTests extends TestBase{
         Set<ContactFio> before = app.contact().all();
         app.goTo().gotoPageContacts();
 
-        ContactFio contact = new ContactFio().withName("fddgdfg").withMiddlename("dssdf").withLastname("sdfsdf");
+        ContactFio contact = new ContactFio().withName("fddgdsdfsdffg").withMiddlename("dssdf").withLastname("sdfsdf");
         app.contact().createContactFio(contact);
         app.contact().createContactInformation(new ContactInformation().withNickname("serejka_sm").withTitle("Title").withCompany("equifax"));
         app.contact().createContactPhone(new ContactAddressPhone().withStreet("каланчевская плаза").withPhone("999-99-98889"));
