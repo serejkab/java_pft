@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.ContactAddressPhone;
 import ru.stqa.pft.addressbook.model.ContactFio;
 import ru.stqa.pft.addressbook.model.ContactInformation;
+import ru.stqa.pft.addressbook.model.Contacts;
 
 
 import java.util.HashSet;
@@ -99,9 +100,9 @@ public class ContactHelper extends HelperBase {
     }
 
 
-    public Set<ContactFio> all() {
+    public Contacts all() {
 
-        Set<ContactFio> contacts = new HashSet<>();
+        Contacts contacts = new Contacts();
         List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
 
         for (WebElement element : elements){
