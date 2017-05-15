@@ -45,8 +45,8 @@ public class ContactModificationTests extends TestBase{
             app.contact().fillContactAddressPhone(new ContactAddressPhone().withStreet("каланчевская плаза").withPhone("999-99-98889"));
             app.goTo().updateData();
             app.goTo().pageHome();
+            assertEquals(app.contact().count(), before.size());
             Contacts  after = app.contact().all();
-            assertEquals(after.size(), before.size());
 
             assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
 

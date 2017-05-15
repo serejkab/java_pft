@@ -25,16 +25,33 @@ public class ContactCreationsTests extends TestBase{
         app.contact().createContactFio(contact);
         app.contact().createContactInformation(new ContactInformation().withNickname("serejka_sm").withTitle("Title").withCompany("equifax"));
         app.contact().createContactPhone(new ContactAddressPhone().withStreet("каланчевская плаза").withPhone("999-99-98889"));
-
         app.goTo().submitData();
         app.goTo().pageHome();
+        assertThat(app.contact().count(), equalTo(before.size() + 1));
         Contacts after = app.contact().all();
-        assertThat(after.size(), equalTo(before.size() + 1));
-
         assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
         app.goTo().logout();
 
     }
 
+    @Test
+    public void testBadContactCreations() {
+
+
+        Contacts before = app.contact().all();
+        app.goTo().gotoPageContacts();
+
+        ContactFio contact = new ContactFio().withName("fd'").withMiddlename("dssdf").withLastname("sdfsdf");
+        app.contact().createContactFio(contact);
+        app.contact().createContactInformation(new ContactInformation().withNickname("serejka_sm").withTitle("Title").withCompany("equifax"));
+        app.contact().createContactPhone(new ContactAddressPhone().withStreet("каланчевская плаза").withPhone("999-99-98889"));
+        app.goTo().submitData();
+        app.goTo().pageHome();
+        assertThat(app.contact().count(), equalTo(before.size()));
+        Contacts after = app.contact().all();
+        assertThat(after, equalTo(before));
+        app.goTo().logout();
+
+    }
 
 }
