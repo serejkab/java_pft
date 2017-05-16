@@ -2,9 +2,7 @@ package ru.stqa.pft.addressbook.tests;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.stqa.pft.addressbook.model.ContactAddressPhone;
 import ru.stqa.pft.addressbook.model.ContactFio;
-import ru.stqa.pft.addressbook.model.ContactInformation;
 import ru.stqa.pft.addressbook.model.Contacts;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -24,8 +22,6 @@ public class ContactModificationTests extends TestBase{
         {
             app.goTo().gotoPageContacts();
             app.contact().createContactFio(new ContactFio().withName("fddgdfg").withMiddlename("dssdf").withLastname("sdfsdf"));
-            app.contact().createContactInformation(new ContactInformation().withNickname("serejka_sm").withTitle("Title").withCompany("equifax"));
-            app.contact().createContactPhone(new ContactAddressPhone().withStreet("каланчевская плаза").withPhone("999-99-98889"));
             app.goTo().submitData();
             app.goTo().pageHome();
         }
@@ -39,12 +35,11 @@ public class ContactModificationTests extends TestBase{
             ContactFio modifiedContact = before.iterator().next();
             app.contact().selectContactById(modifiedContact.getId());
             app.contact().pushEdit(modifiedContact.getId());
-            ContactFio contact = new ContactFio().withId(modifiedContact.getId()).withName("fddgdfg").withMiddlename("dssdf").withLastname("sdfsdf");
+            ContactFio contact = new ContactFio().withId(modifiedContact.getId()).withName("fddgdfg2222").withMiddlename("dssdf2222").withLastname("sdfsdf2222");
             app.contact().fillContactFio(contact);
-            app.contact().fillContactInformation(new ContactInformation().withNickname("serejka_sm").withTitle("Title").withCompany("equifax"));
-            app.contact().fillContactAddressPhone(new ContactAddressPhone().withStreet("каланчевская плаза").withPhone("999-99-98889"));
             app.goTo().updateData();
             app.goTo().pageHome();
+            app.contact().contactCache = null;
             assertEquals(app.contact().count(), before.size());
             Contacts  after = app.contact().all();
 

@@ -1,17 +1,9 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.stqa.pft.addressbook.model.ContactAddressPhone;
 import ru.stqa.pft.addressbook.model.ContactFio;
-import ru.stqa.pft.addressbook.model.ContactInformation;
 import ru.stqa.pft.addressbook.model.Contacts;
-
-import java.util.List;
-import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -29,8 +21,6 @@ public class ContactDeleteTests  extends TestBase{
         {
             app.goTo().gotoPageContacts();
             app.contact().createContactFio(new ContactFio().withName("fddgdfg").withMiddlename("dssdf").withLastname("sdfsdf"));
-            app.contact().createContactInformation(new ContactInformation().withNickname("serejka_sm").withTitle("Title").withCompany("equifax"));
-            app.contact().createContactPhone(new ContactAddressPhone().withStreet("каланчевская плаза").withPhone("999-99-98889"));
             app.goTo().submitData();
             app.goTo().pageHome();
         }

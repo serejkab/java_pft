@@ -8,7 +8,49 @@ public class ContactFio {
     private  String name;
     private  String middlename;
     private  String lastname;
+    private  String homePhone;
+    private  String mobilePhone;
+    private  String workPhone;
+    private  String allPhones;
 
+    public String getAllPhones() {
+        return allPhones;
+    }
+
+    public ContactFio withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
+    }
+
+    public ContactFio withHomePhone(String homePhone) {
+        this.homePhone = homePhone;
+        return this;
+    }
+
+
+    public ContactFio withMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
+        return this;
+    }
+
+    public ContactFio withWorkPhone(String workPhone) {
+        this.workPhone = workPhone;
+        return this;
+    }
+
+
+
+    public String getHomePhone() {
+        return homePhone;
+    }
+
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+
+    public String getWorkPhone() {
+        return workPhone;
+    }
 
     public ContactFio withId(int id) {
         this.id = id;

@@ -3,9 +3,7 @@ package ru.stqa.pft.addressbook.tests;
 
 
 import org.testng.annotations.Test;
-import ru.stqa.pft.addressbook.model.ContactAddressPhone;
 import ru.stqa.pft.addressbook.model.ContactFio;
-import ru.stqa.pft.addressbook.model.ContactInformation;
 import ru.stqa.pft.addressbook.model.Contacts;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -23,8 +21,6 @@ public class ContactCreationsTests extends TestBase{
 
         ContactFio contact = new ContactFio().withName("fddgdsdfsdffg").withMiddlename("dssdf").withLastname("sdfsdf");
         app.contact().createContactFio(contact);
-        app.contact().createContactInformation(new ContactInformation().withNickname("serejka_sm").withTitle("Title").withCompany("equifax"));
-        app.contact().createContactPhone(new ContactAddressPhone().withStreet("каланчевская плаза").withPhone("999-99-98889"));
         app.goTo().submitData();
         app.goTo().pageHome();
         assertThat(app.contact().count(), equalTo(before.size() + 1));
@@ -43,8 +39,6 @@ public class ContactCreationsTests extends TestBase{
 
         ContactFio contact = new ContactFio().withName("fd'").withMiddlename("dssdf").withLastname("sdfsdf");
         app.contact().createContactFio(contact);
-        app.contact().createContactInformation(new ContactInformation().withNickname("serejka_sm").withTitle("Title").withCompany("equifax"));
-        app.contact().createContactPhone(new ContactAddressPhone().withStreet("каланчевская плаза").withPhone("999-99-98889"));
         app.goTo().submitData();
         app.goTo().pageHome();
         assertThat(app.contact().count(), equalTo(before.size()));
