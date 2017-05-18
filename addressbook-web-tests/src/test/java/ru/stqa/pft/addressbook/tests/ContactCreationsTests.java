@@ -6,6 +6,8 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactFio;
 import ru.stqa.pft.addressbook.model.Contacts;
 
+import java.io.File;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -18,8 +20,8 @@ public class ContactCreationsTests extends TestBase{
 
         Contacts before = app.contact().all();
         app.goTo().gotoPageContacts();
-
-        ContactFio contact = new ContactFio().withName("fddgdsdfsdffg").withMiddlename("dssdf").withLastname("sdfsdf");
+        File photo = new File("src/test/resources/12.jpg");
+        ContactFio contact = new ContactFio().withName("fddgdsdfsdffg").withMiddlename("dssdf").withLastname("sdfsdf").withPhoto(photo);
         app.contact().createContactFio(contact);
         app.goTo().submitData();
         app.goTo().pageHome();
@@ -37,7 +39,8 @@ public class ContactCreationsTests extends TestBase{
         Contacts before = app.contact().all();
         app.goTo().gotoPageContacts();
 
-        ContactFio contact = new ContactFio().withName("fd'").withMiddlename("dssdf").withLastname("sdfsdf");
+
+        ContactFio contact = new ContactFio().withName("ffdsfsdfd'").withMiddlename("dss3f3fsefsfdf").withLastname("s444444dfsdf");
         app.contact().createContactFio(contact);
         app.goTo().submitData();
         app.goTo().pageHome();
