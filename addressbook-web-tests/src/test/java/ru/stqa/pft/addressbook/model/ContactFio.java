@@ -12,6 +12,11 @@ public class ContactFio {
     private  String mobilePhone;
     private  String workPhone;
     private  String allPhones;
+    private  String email;
+    private  String email2;
+    private  String email3;
+    private  String allMails;
+    private  String address;
 
     public String getAllPhones() {
         return allPhones;
@@ -19,6 +24,24 @@ public class ContactFio {
 
     public ContactFio withAllPhones(String allPhones) {
         this.allPhones = allPhones;
+        return this;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public ContactFio withAddress(String address) {
+        this.address = address;
+        return this;
+    }
+
+    public String getAllMails() {
+        return allMails;
+    }
+
+    public ContactFio withAllMails(String allMails) {
+        this.allMails = allMails;
         return this;
     }
 
@@ -38,7 +61,32 @@ public class ContactFio {
         return this;
     }
 
+    public String getEmail() {
+        return email;
+    }
 
+    public ContactFio withEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public String getEmail2() {
+        return email2;
+    }
+
+    public ContactFio withEmail2(String email2) {
+        this.email2 = email2;
+        return this;
+    }
+
+    public String getEmail3() {
+        return email3;
+    }
+
+    public ContactFio withEmail3(String email3) {
+        this.email3 = email3;
+        return this;
+    }
 
     public String getHomePhone() {
         return homePhone;
