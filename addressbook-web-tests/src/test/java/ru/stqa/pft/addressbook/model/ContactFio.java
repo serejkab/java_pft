@@ -1,5 +1,7 @@
 package ru.stqa.pft.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+
 import java.io.File;
 
 public class ContactFio {
@@ -7,17 +9,22 @@ public class ContactFio {
 
 
     private  int id = Integer.MAX_VALUE;
+    @Expose
     private  String name;
     private  String middlename;
+    @Expose
     private  String lastname;
+    @Expose
     private  String homePhone;
     private  String mobilePhone;
     private  String workPhone;
     private  String allPhones;
+    @Expose
     private  String email;
     private  String email2;
     private  String email3;
     private  String allMails;
+    @Expose
     private  String address;
     private File photo;
 
