@@ -65,7 +65,7 @@ public class ContactDataGenerator {
         List<ContactFio> contacts = new ArrayList<>();
         for (int i = 0; i <count; i++){
             contacts.add(new ContactFio().withLastname(String.format("lastname %s", i)).withName(String.format("name %s", i)).withAddress(String.format("address %s", i))
-            .withEmail(String.format("email %s", i)).withHomePhone(String.format("homephone %s", i)));
+                    .withHomePhone(String.format("homephone %s", i)).withEmail(String.format("email %s", i)));
         }
         return contacts;
     }

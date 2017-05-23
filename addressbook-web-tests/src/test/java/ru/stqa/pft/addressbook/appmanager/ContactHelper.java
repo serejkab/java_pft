@@ -25,6 +25,14 @@ public class ContactHelper extends HelperBase {
         type(By.name("firstname"),contactFio.getName());
         type(By.name("middlename"),contactFio.getMiddlename());
         type(By.name("lastname"),contactFio.getLastname());
+        type(By.name("address"),contactFio.getAddress());
+        type(By.name("home"),contactFio.getHomePhone());
+        type(By.name("mobile"),contactFio.getMobilePhone());
+        type(By.name("work"),contactFio.getWorkPhone());
+        type(By.name("email"),contactFio.getEmail());
+        type(By.name("email2"),contactFio.getEmail2());
+        type(By.name("email3"),contactFio.getEmail3());
+
         attach(By.name("photo"), contactFio.getPhoto());
 
     }
