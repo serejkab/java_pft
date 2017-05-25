@@ -25,7 +25,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupCreationsTests extends TestBase {
 
-    Logger logger = LoggerFactory.getLogger(GroupCreationsTests.class);
+
 
 
     @DataProvider
@@ -65,7 +65,6 @@ public class GroupCreationsTests extends TestBase {
 
     @Test(dataProvider = "validGroupsFromJson")
     public void testGroupCreation(GroupData group) {
-        logger.info("Start test testGroupCreation");
 
         app.goTo().groupPage();
         Groups before = app.group().all();
@@ -73,7 +72,7 @@ public class GroupCreationsTests extends TestBase {
         assertThat(app.group().count(), equalTo(before.size() + 1));
         Groups after = app.group().all();
         assertThat(after, equalTo(before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
-        logger.info("Stop test testGroupCreation");
+
     }
 
     @Test (enabled = false)
