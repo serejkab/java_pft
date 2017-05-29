@@ -44,13 +44,13 @@ public class ContactCreationsTests extends TestBase{
     public void testContactCreations(ContactFio contact) {
 
 
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contacts();
         app.goTo().gotoPageContacts();
         app.contact().createContactFio(contact);
         app.goTo().submitData();
         app.goTo().pageHome();
         assertThat(app.contact().count(), equalTo(before.size() + 1));
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contacts();
         assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
 
 
@@ -60,7 +60,7 @@ public class ContactCreationsTests extends TestBase{
     public void testBadContactCreations() {
 
 
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contacts();
         app.goTo().gotoPageContacts();
 
 
@@ -69,7 +69,7 @@ public class ContactCreationsTests extends TestBase{
         app.goTo().submitData();
         app.goTo().pageHome();
         assertThat(app.contact().count(), equalTo(before.size()));
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contacts();
         assertThat(after, equalTo(before));
         app.goTo().logout();
 
