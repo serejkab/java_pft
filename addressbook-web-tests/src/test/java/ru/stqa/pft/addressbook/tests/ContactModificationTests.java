@@ -18,10 +18,11 @@ public class ContactModificationTests extends TestBase{
     public void ensurePreconditions(){
 
         app.goTo().pageHome();
-        if(app.contact().all().size() == 0)
+        if(app.db().contacts().size() == 0)
         {
             app.goTo().gotoPageContacts();
-            app.contact().createContactFio(new ContactFio().withName("fddgdfg").withMiddlename("dssdf").withLastname("sdfsdf"));
+            app.contact().createContactFio(new ContactFio().withName("fddgdfg").withMiddlename("dssdf").withLastname("sdfsdf").withAddress("dfsdfsdf").withEmail("asdasd")
+            .withEmail2("sadsafaf").withEmail3("dsfsdff").withHomePhone("34324234").withMobilePhone("34234234").withWorkPhone("32423423423"));
             app.goTo().submitData();
             app.goTo().pageHome();
         }
@@ -31,17 +32,19 @@ public class ContactModificationTests extends TestBase{
         @Test
         public void testContactModification(){
 
-            Contacts before = app.contact().all();
+            Contacts before = app.db().contacts();
             ContactFio modifiedContact = before.iterator().next();
             app.contact().selectContactById(modifiedContact.getId());
             app.contact().pushEdit(modifiedContact.getId());
-            ContactFio contact = new ContactFio().withId(modifiedContact.getId()).withName("fddgdfg2222").withMiddlename("dssdf2222").withLastname("sdfsdf2222");
+            ContactFio contact = new ContactFio().withId(modifiedContact.getId()).withName("fddgdfg2222").withMiddlename("dssdf2222").withLastname("sdfsdf2222")
+                    .withAddress("dfsdfsdf").withEmail("asdasd")
+                    .withEmail2("sadsafaf").withEmail3("dsfsdff").withHomePhone("34324234").withMobilePhone("34234234").withWorkPhone("32423423423");
             app.contact().fillContactFio(contact);
             app.goTo().updateData();
             app.goTo().pageHome();
             app.contact().contactCache = null;
             assertEquals(app.contact().count(), before.size());
-            Contacts  after = app.contact().all();
+            Contacts  after = app.db().contacts();
 
             assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
 
