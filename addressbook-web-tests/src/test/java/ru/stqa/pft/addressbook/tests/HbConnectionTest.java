@@ -48,6 +48,7 @@ public class HbConnectionTest {
         List<ContactFio> result = session.createQuery( "from ContactFio where deprecated = '0000-00-00'" ).list();
         for ( ContactFio contact : result ) {
             System.out.println(contact);
+            System.out.println(contact.getGroups());
         }
         session.getTransaction().commit();
         session.close();

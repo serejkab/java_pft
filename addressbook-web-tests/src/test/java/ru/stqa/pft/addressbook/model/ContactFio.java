@@ -5,6 +5,8 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -59,6 +61,10 @@ public class ContactFio {
     @Transient
     private String photo;
 
+    @ManyToMany
+    @JoinTable(name = "address_in_groups", joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<GroupData> groups = new HashSet<>();
 
     public File getPhoto() {
         if (photo !=  null) {
@@ -189,12 +195,24 @@ public class ContactFio {
         return this;
     }
 
+    public Groups getGroups() {
+        return new Groups(groups);
+    }
+
     @Override
     public String toString() {
         return "ContactFio{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", name='" + name + '\'' +
+                ", middlename='" + middlename + '\'' +
                 ", lastname='" + lastname + '\'' +
+                ", homePhone='" + homePhone + '\'' +
+                ", mobilePhone='" + mobilePhone + '\'' +
+                ", workPhone='" + workPhone + '\'' +
+                ", email='" + email + '\'' +
+                ", email2='" + email2 + '\'' +
+                ", email3='" + email3 + '\'' +
+                ", address='" + address + '\'' +
                 '}';
     }
 
@@ -233,5 +251,10 @@ public class ContactFio {
         result = 31 * result + (email3 != null ? email3.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
         return result;
+    }
+
+    public ContactFio inGroup(GroupData group) {
+        groups.add(group);
+        return this;
     }
 }

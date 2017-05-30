@@ -3,6 +3,8 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactFio;
 import ru.stqa.pft.addressbook.model.Contacts;
 
@@ -62,6 +64,16 @@ public class ContactHelper extends HelperBase {
         wd.switchTo().alert().accept();
     }
 
+    public void contactAddToGroup(ContactFio contactFio){
+        if (contactFio.getGroups().size() > 0){
+            Assert.assertTrue(contactFio.getGroups().size() == 1);
+            new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(contactFio.getGroups().iterator().next().getName());
+        } else {
+            Assert.assertFalse(isElementPresent(By.name("to_group")));
+        }
+        wd.findElement(By.name("add")).click();
+    }
+
 
     public void createContactFio(ContactFio contactFio) {
 
@@ -104,6 +116,7 @@ public class ContactHelper extends HelperBase {
         }
         return new Contacts(contactCache);
     }
+
 
 
 
