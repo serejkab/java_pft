@@ -17,6 +17,7 @@ public class ContactFio {
     @Expose
     @Column (name = "firstname")
     private  String name;
+    @Expose
     @Column (name = "middlename")
     private  String middlename;
     @Expose
@@ -26,9 +27,11 @@ public class ContactFio {
     @Column (name = "home")
     @Type(type = "text")
     private  String homePhone;
+    @Expose
     @Column (name = "mobile")
     @Type(type = "text")
     private  String mobilePhone;
+    @Expose
     @Column (name = "work")
     @Type(type = "text")
     private  String workPhone;
@@ -38,9 +41,11 @@ public class ContactFio {
     @Column (name = "email")
     @Type(type = "text")
     private  String email;
+    @Expose
     @Column (name = "email2")
     @Type(type = "text")
     private  String email2;
+    @Expose
     @Column (name = "email3")
     @Type(type = "text")
     private  String email3;
@@ -56,7 +61,11 @@ public class ContactFio {
 
 
     public File getPhoto() {
-        return new File(photo);
+        if (photo !=  null) {
+            return new File(photo);
+        } else {
+            return null;
+        }
     }
 
     public ContactFio withPhoto(File photo) {
