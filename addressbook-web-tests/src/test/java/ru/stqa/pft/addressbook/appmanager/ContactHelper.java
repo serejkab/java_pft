@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactFio;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 
 import java.util.List;
@@ -72,6 +74,12 @@ public class ContactHelper extends HelperBase {
             Assert.assertFalse(isElementPresent(By.name("to_group")));
         }
         wd.findElement(By.name("add")).click();
+    }
+
+    public void selectGroupBeforeDelete(GroupData groups){
+
+        new Select(wd.findElement(By.name("group"))).selectByValue(groups.getName());
+
     }
 
 
