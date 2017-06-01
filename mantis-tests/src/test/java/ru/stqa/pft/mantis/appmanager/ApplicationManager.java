@@ -18,17 +18,12 @@ public class ApplicationManager {
     private final Properties properties;
     WebDriver wd;
 
-
     private String browser;
-
-
 
     public ApplicationManager(String browser){
         this.browser = browser;
         properties = new Properties();
     }
-
-
     public void init() throws IOException {
 
         String target = System.getProperty("target", "local");
@@ -40,18 +35,19 @@ public class ApplicationManager {
             wd = new ChromeDriver();
         }
 
-
        wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
        wd.get(properties.getProperty("web.baseUrl"));
-
-        
     }
-
-
-
     public void stop() {
         wd.quit();
     }
 
+    public HttpSession newSession(){
+        return new HttpSession(this);
+    }
+
+    public String getProperty(String key) {
+        return properties.getProperty(key);
+    }
 
 }
