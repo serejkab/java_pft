@@ -22,6 +22,7 @@ public class ApplicationManager {
     private RegistrationHelper registrationHelper;
     private FtpHelper ftp;
     private MailHelper mailHelper;
+    private DbHelper dbHelper;
 
 
     public ApplicationManager(String browser) {
@@ -83,5 +84,9 @@ public class ApplicationManager {
         }
         return mailHelper;
 
+    }
+
+    public DbHelper db() {
+        return dbHelper;
     }
 }

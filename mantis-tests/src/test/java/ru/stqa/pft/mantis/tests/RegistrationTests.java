@@ -40,7 +40,7 @@ public class RegistrationTests extends TestBase{
     private String findConfirmationLink(List<MailMessage> mailMessages, String email) {
         MailMessage mailMessage = mailMessages.stream().filter((m) -> m.to.equals(email)).findAny().get();
         VerbalExpression regex = VerbalExpression.regex().find("http://").nonSpace().oneOrMore().build();
-       return regex.getText(mailMessage.toString());
+       return regex.getText(mailMessage.next);
     }
 
     @AfterMethod(alwaysRun = true)
