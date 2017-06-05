@@ -27,7 +27,7 @@ import java.util.List;
         public Users users() {
             Session session = sessionFactory.openSession();
             session.beginTransaction();
-            List<User> result = session.createQuery( "from GroupData" ).list();
+            List<User> result = session.createQuery( "from mantis_user_table" ).list();
             session.getTransaction().commit();
             session.close();
             return new Users(result);
