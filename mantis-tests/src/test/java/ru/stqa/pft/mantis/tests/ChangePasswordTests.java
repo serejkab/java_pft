@@ -27,7 +27,7 @@ public class ChangePasswordTests extends TestBase {
         String user = "administrator";
         String password = "root";
        app.registration().login(user, password);
-        
+
 
 
        HttpSession session = app.newSession();
