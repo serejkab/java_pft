@@ -42,9 +42,9 @@ public class TestBase {
         IssueData issueData = new IssueData();
         issueData.setId(BigInteger.valueOf(issueId));
         if(issueData.getStatus().equals("resolved")){
-            return true;
-        } else {
             return false;
+        } else {
+            return true;
         }
 
     }
