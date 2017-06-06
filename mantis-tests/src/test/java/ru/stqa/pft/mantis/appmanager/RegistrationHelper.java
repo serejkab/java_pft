@@ -1,6 +1,7 @@
 package ru.stqa.pft.mantis.appmanager;
 
 import org.openqa.selenium.By;
+import ru.stqa.pft.mantis.Model.User;
 
 
 /**
@@ -33,5 +34,9 @@ public class RegistrationHelper extends HelperBase {
         type(By.name("username"), username);
         type(By.name("password"), password);
         click(By.cssSelector("input[value='Login']"));
+    }
+
+    public void selectUser(User user) {
+
     }
 }

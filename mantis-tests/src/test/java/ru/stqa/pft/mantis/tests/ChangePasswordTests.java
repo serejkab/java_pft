@@ -16,7 +16,7 @@ import java.io.IOException;
  */
 public class ChangePasswordTests extends TestBase {
 
-    @BeforeMethod
+     @BeforeMethod
     public void startMailServer() {
         app.mail().start();
     }
@@ -26,13 +26,11 @@ public class ChangePasswordTests extends TestBase {
 
         String user = "administrator";
         String password = "root";
-        app.registration().login(user, password);
-        Users before = app.db().users();
-        User modifiedUserFromBD = before.iterator().next();
-        User userFromBD = new User().withId(modifiedUserFromBD.getId());
+       app.registration().login(user, password);
+        
 
 
-        HttpSession session = app.newSession();
+       HttpSession session = app.newSession();
         session.login("administrator", "root");
 
 
